@@ -4,6 +4,9 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import pageobject.ConstructorPageBurger;
+import pageobject.LoginPageBurger;
+import pageobject.RegistrationPageBurger;
 
 public class RegistrationTests {
     private WebDriver driver;
@@ -19,7 +22,7 @@ public class RegistrationTests {
     public void BeforeTest() {
         ChromeOptions options = new ChromeOptions();
         driver = new ChromeDriver(options);
-        driver.get("https://stellarburgers.nomoreparties.site/login");
+        driver.get("https://stellarburgers.nomoreparties.site");
     }
 
     @After
@@ -29,9 +32,12 @@ public class RegistrationTests {
 
     @Test
     public void checkRegistration(){
+        ConstructorPageBurger constructorPageBurger = new ConstructorPageBurger(driver);
         LoginPageBurger loginPageBurger = new LoginPageBurger(driver);
-        loginPageBurger.clickRegistrationButton();
         RegistrationPageBurger registrationPageBurger = new RegistrationPageBurger(driver);
+
+        constructorPageBurger.clickLoginAccountButton();
+        loginPageBurger.clickRegistrationAccountButton();
         registrationPageBurger.sendRegistrationDataFields(name, mail, correctPassword);
         registrationPageBurger.clickRegistrationButton();
         loginPageBurger.displayedLoginImage();
@@ -39,9 +45,12 @@ public class RegistrationTests {
 
     @Test
     public void checkRegistrationIncorrectPassword(){
+        ConstructorPageBurger constructorPageBurger = new ConstructorPageBurger(driver);
         LoginPageBurger loginPageBurger = new LoginPageBurger(driver);
-        loginPageBurger.clickRegistrationButton();
         RegistrationPageBurger registrationPageBurger = new RegistrationPageBurger(driver);
+
+        constructorPageBurger.clickLoginAccountButton();
+        loginPageBurger.clickRegistrationAccountButton();
         registrationPageBurger.sendRegistrationDataFields(name, mail, incorrectPassword);
         registrationPageBurger.clickRegistrationButton();
         registrationPageBurger.displayedIncorrectPasswordMessage();

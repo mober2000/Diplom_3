@@ -5,16 +5,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import pageobject.ConstructorPageBurger;
-import pageobject.ForgotPasswordPageBurger;
 import pageobject.LoginPageBurger;
-import pageobject.RegistrationPageBurger;
+import pageobject.PersonalAccountPageBurger;
 
-public class LoginTests {
-
+public class TransitionPageTests {
     private WebDriver driver;
-    String loginMail = "TestLogin@test.com";
+    String loginName = "testLogin";
+    String loginMail = "testlogin@test.com";
     String password = "123456";
-
 
     @Before
     public void BeforeTest() {
@@ -29,52 +27,39 @@ public class LoginTests {
     }
 
     @Test
-    public void loginMainPage(){
+    public void transitionIntoPersonalAccountPageFromConstructorPage(){
         ConstructorPageBurger constructorPageBurger = new ConstructorPageBurger(driver);
         LoginPageBurger loginPageBurger = new LoginPageBurger(driver);
+        PersonalAccountPageBurger personalAccountPageBurger = new PersonalAccountPageBurger(driver);
 
         constructorPageBurger.clickLoginAccountButton();
         loginPageBurger.sendLoginDataFields(loginMail, password);
         loginPageBurger.clickLoginButton();
         constructorPageBurger.checkCreateOrderButton();
-    }
-
-    @Test
-    public void loginThroughPersonalAccountButton(){
-        ConstructorPageBurger constructorPageBurger = new ConstructorPageBurger(driver);
-        LoginPageBurger loginPageBurger = new LoginPageBurger(driver);
-
         constructorPageBurger.clickPersonalAccountButton();
-        loginPageBurger.sendLoginDataFields(loginMail, password);
-        loginPageBurger.clickLoginButton();
-        constructorPageBurger.checkCreateOrderButton();
+        personalAccountPageBurger.checkProfileWord();
+        personalAccountPageBurger.checkStoryOrdersWord();
+        personalAccountPageBurger.checkNameFieldValue(loginName);
+        personalAccountPageBurger.checkLoginFieldValue(loginMail);
     }
 
     @Test
-    public void loginThroughRegistrationForm(){
+    public void transitionIntoConstructorPagePageFromPersonalAccountPage(){
         ConstructorPageBurger constructorPageBurger = new ConstructorPageBurger(driver);
         LoginPageBurger loginPageBurger = new LoginPageBurger(driver);
-        RegistrationPageBurger registrationPageBurger = new RegistrationPageBurger(driver);
+        PersonalAccountPageBurger personalAccountPageBurger = new PersonalAccountPageBurger(driver);
 
         constructorPageBurger.clickLoginAccountButton();
-        loginPageBurger.clickRegistrationAccountButton();
-        registrationPageBurger.clickLoginButton();
         loginPageBurger.sendLoginDataFields(loginMail, password);
         loginPageBurger.clickLoginButton();
         constructorPageBurger.checkCreateOrderButton();
-    }
-
-    @Test
-    public void loginThroughForgotPasswordForm(){
-        ConstructorPageBurger constructorPageBurger = new ConstructorPageBurger(driver);
-        LoginPageBurger loginPageBurger = new LoginPageBurger(driver);
-        ForgotPasswordPageBurger forgotPasswordPageBurger = new ForgotPasswordPageBurger(driver);
-
-        constructorPageBurger.clickLoginAccountButton();
-        loginPageBurger.clickForgotPasswordButton();
-        forgotPasswordPageBurger.clickLoginButton();
-        loginPageBurger.sendLoginDataFields(loginMail, password);
-        loginPageBurger.clickLoginButton();
+        constructorPageBurger.clickPersonalAccountButton();
+        personalAccountPageBurger.checkProfileWord();
+        personalAccountPageBurger.clickConstructorButton();
+        constructorPageBurger.checkCreateOrderButton();
+        constructorPageBurger.clickPersonalAccountButton();
+        personalAccountPageBurger.clickStellarBurgerButton();
         constructorPageBurger.checkCreateOrderButton();
     }
+
 }
