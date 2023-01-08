@@ -15,6 +15,7 @@ public class LoginPageBurger {
     private final By loginButton = By.xpath(".//button[text()='Войти']");
     private final By registrationAccountButton = By.xpath(".//a[text()='Зарегистрироваться']");
     private final By forgotPasswordButton = By.xpath(".//a[text()='Восстановить пароль']");
+    private final By constructorButton = By.xpath(".//p[text()='Конструктор']");
 
     public LoginPageBurger(WebDriver driver) {
         this.driver = driver;
@@ -23,15 +24,16 @@ public class LoginPageBurger {
     public void clickRegistrationAccountButton(){
         driver.findElement(registrationAccountButton).click();
     }
-
     public void clickForgotPasswordButton(){
         driver.findElement(forgotPasswordButton).click();
     }
+    public void clickConstructorButton(){
+        driver.findElement(constructorButton).click();
+    }
 
-    public void displayedLoginImage(){
+    public void displayedLoginWord(){
         new WebDriverWait(driver, Duration.ofSeconds(5))
                 .until(ExpectedConditions.visibilityOfElementLocated(loginImage));
-        driver.findElement(loginImage).isDisplayed();
     }
     public void sendLoginName(String email) {
         driver.findElement(emailField).sendKeys(email);

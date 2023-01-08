@@ -40,7 +40,7 @@ public class RegistrationTests {
         loginPageBurger.clickRegistrationAccountButton();
         registrationPageBurger.sendRegistrationDataFields(name, mail, correctPassword);
         registrationPageBurger.clickRegistrationButton();
-        loginPageBurger.displayedLoginImage();
+        loginPageBurger.displayedLoginWord();
     }
 
     @Test

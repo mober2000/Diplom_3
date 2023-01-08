@@ -9,12 +9,10 @@ import java.time.Duration;
 
 public class ConstructorPageBurger {
     private final WebDriver driver;
-
-    private final By createBurgerText = By.xpath(".//h1[text()='Соберите бургер']");
-
     private final By createOrderButton = By.xpath(".//button[text()='Оформить заказ']");
     private final By loginAccountButton = By.xpath(".//button[text()='Войти в аккаунт']");
     private final By personalAccountButton = By.xpath(".//p[text()='Личный Кабинет']");
+
 
     public ConstructorPageBurger(WebDriver driver) {
         this.driver = driver;
@@ -31,12 +29,22 @@ public class ConstructorPageBurger {
     public void checkCreateOrderButton(){
         new WebDriverWait(driver, Duration.ofSeconds(5))
                 .until(ExpectedConditions.visibilityOfElementLocated(createOrderButton));
-        driver.findElement(createOrderButton).isDisplayed();
     }
 
-    public void checkCreateBurgerText(){
-        new WebDriverWait(driver, Duration.ofSeconds(5))
-                .until(ExpectedConditions.visibilityOfElementLocated(createBurgerText));
-        driver.findElement(createBurgerText).isDisplayed();
+    public void checkLoginAccountButton(){
+        driver.findElement(loginAccountButton).isDisplayed();
     }
+
+    public void clickAndSelectTypeButtonBurger(String ingredientType){
+        driver.findElement(By.xpath(".//span[text()='" + ingredientType + "']")).click();
+        driver.findElement(By.xpath(".//div[@class='tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 pb-4 pl-10 noselect']/span[text()='" + ingredientType + "']")).isDisplayed();
+    }
+
+    public void checkIngredientNameTypeToScrollList(String ingredientType){
+        new WebDriverWait(driver, Duration.ofSeconds(5))
+                .until(ExpectedConditions.visibilityOfElementLocated((By.xpath(".//h2[text()='" + ingredientType +"']"))));
+
+    }
+
+
 }

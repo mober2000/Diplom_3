@@ -62,4 +62,40 @@ public class TransitionPageTests {
         constructorPageBurger.checkCreateOrderButton();
     }
 
+    @Test
+    public void exitPersonalAccount(){
+        ConstructorPageBurger constructorPageBurger = new ConstructorPageBurger(driver);
+        LoginPageBurger loginPageBurger = new LoginPageBurger(driver);
+        PersonalAccountPageBurger personalAccountPageBurger = new PersonalAccountPageBurger(driver);
+
+        constructorPageBurger.clickLoginAccountButton();
+        loginPageBurger.sendLoginDataFields(loginMail, password);
+        loginPageBurger.clickLoginButton();
+        constructorPageBurger.checkCreateOrderButton();
+        constructorPageBurger.clickPersonalAccountButton();
+        personalAccountPageBurger.clickExitButton();
+        loginPageBurger.displayedLoginWord();
+        loginPageBurger.clickConstructorButton();
+        constructorPageBurger.checkLoginAccountButton();
+        constructorPageBurger.clickPersonalAccountButton();
+        loginPageBurger.displayedLoginWord();
+    }
+
+    @Test
+    public void transitionIngredientInConstructorPage(){
+        ConstructorPageBurger constructorPageBurger = new ConstructorPageBurger(driver);
+        LoginPageBurger loginPageBurger = new LoginPageBurger(driver);
+        PersonalAccountPageBurger personalAccountPageBurger = new PersonalAccountPageBurger(driver);
+
+        constructorPageBurger.clickLoginAccountButton();
+        loginPageBurger.sendLoginDataFields(loginMail, password);
+        loginPageBurger.clickLoginButton();
+        constructorPageBurger.checkCreateOrderButton();
+        constructorPageBurger.clickAndSelectTypeButtonBurger("Начинки");
+        constructorPageBurger.checkIngredientNameTypeToScrollList("Начинки");
+        constructorPageBurger.clickAndSelectTypeButtonBurger("Соусы");
+        constructorPageBurger.checkIngredientNameTypeToScrollList("Соусы");
+        constructorPageBurger.clickAndSelectTypeButtonBurger("Булки");
+        constructorPageBurger.checkIngredientNameTypeToScrollList("Булки");
+    }
 }

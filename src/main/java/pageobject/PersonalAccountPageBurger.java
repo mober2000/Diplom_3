@@ -13,10 +13,10 @@ public class PersonalAccountPageBurger {
     private WebDriver driver;
     private final By profileText = By.xpath(".//a[text()='Профиль']");
     private final By storyOrdersText = By.xpath(".//a[text()='История заказов']");
-
     private final By constructorButton = By.xpath(".//p[text()='Конструктор']");
-
     private final By stellarBurgerButton = By.className("AppHeader_header__logo__2D0X2");
+    private final By exitButton = By.xpath(".//button[text()='Выход']");
+
 
 
     public PersonalAccountPageBurger(WebDriver driver) {
@@ -31,6 +31,12 @@ public class PersonalAccountPageBurger {
         driver.findElement(stellarBurgerButton).click();
     }
 
+    public void clickExitButton(){
+        new WebDriverWait(driver, Duration.ofSeconds(5))
+                .until(ExpectedConditions.visibilityOfElementLocated(exitButton));
+        driver.findElement(exitButton).click();
+    }
+
     public void checkProfileWord(){
         new WebDriverWait(driver, Duration.ofSeconds(5))
                 .until(ExpectedConditions.visibilityOfElementLocated(profileText));
@@ -39,7 +45,6 @@ public class PersonalAccountPageBurger {
     public void checkStoryOrdersWord(){
         new WebDriverWait(driver, Duration.ofSeconds(5))
                 .until(ExpectedConditions.visibilityOfElementLocated(storyOrdersText));
-        driver.findElement(storyOrdersText).isDisplayed();
     }
 
     public void checkNameFieldValue(String userName){
