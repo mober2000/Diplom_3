@@ -1,7 +1,6 @@
 import org.apache.commons.lang3.RandomStringUtils;
 
 public class RandomGenerator {
-
     public String randomEmailYandex() {
         return RandomStringUtils.randomAlphanumeric(10).toLowerCase() + "@yandex.ru";
     }
@@ -17,5 +16,4 @@ public class RandomGenerator {
     public String randomName() {
         return RandomStringUtils.randomAlphanumeric(12);
     }
-
 }

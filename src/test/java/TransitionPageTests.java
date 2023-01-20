@@ -1,3 +1,5 @@
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,6 +29,8 @@ public class TransitionPageTests {
     }
 
     @Test
+    @DisplayName("Check Transition Into Personal Account Page From Constructor Page")
+    @Description("Проверка перехода по клику на «Личный кабинет»")
     public void transitionIntoPersonalAccountPageFromConstructorPage() {
         ConstructorPageBurger constructorPageBurger = new ConstructorPageBurger(driver);
         PersonalAccountPageBurger personalAccountPageBurger = new PersonalAccountPageBurger(driver);
@@ -42,6 +46,8 @@ public class TransitionPageTests {
     }
 
     @Test
+    @DisplayName("Check Transition Into Personal Account Page From Constructor Page")
+    @Description("Проверка перехода по клику на «Конструктор» и на логотип Stellar Burgers")
     public void transitionIntoConstructorPagePageFromPersonalAccountPage() {
         ConstructorPageBurger constructorPageBurger = new ConstructorPageBurger(driver);
         PersonalAccountPageBurger personalAccountPageBurger = new PersonalAccountPageBurger(driver);
@@ -59,6 +65,8 @@ public class TransitionPageTests {
     }
 
     @Test
+    @DisplayName("Check Exit Personal Account")
+    @Description("Проверка выхода из аккаунта по кнопке «Выйти» в личном кабинете.")
     public void exitPersonalAccount() {
         ConstructorPageBurger constructorPageBurger = new ConstructorPageBurger(driver);
         LoginPageBurger loginPageBurger = new LoginPageBurger(driver);
@@ -77,6 +85,8 @@ public class TransitionPageTests {
     }
 
     @Test
+    @DisplayName("Check Transition IngredientInConstructorPage")
+    @Description("Проверка на переходы между разделами: \"Начинки\", \"Соусы\", \"Булки\"")
     public void transitionIngredientInConstructorPage() {
         ConstructorPageBurger constructorPageBurger = new ConstructorPageBurger(driver);
         TestCases testCases = new TestCases(driver);

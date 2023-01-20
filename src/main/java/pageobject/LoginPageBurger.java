@@ -33,9 +33,10 @@ public class LoginPageBurger {
         driver.findElement(constructorButton).click();
     }
 
-    public void displayedLoginWord() {
+    public void clickLoginButton() {
         new WebDriverWait(driver, Duration.ofSeconds(5))
-                .until(ExpectedConditions.visibilityOfElementLocated(loginImage));
+                .until(ExpectedConditions.visibilityOfElementLocated(loginButton));
+        driver.findElement(loginButton).click();
     }
 
     public void sendLoginName(String email) {
@@ -48,14 +49,13 @@ public class LoginPageBurger {
         driver.findElement(passwordField).sendKeys(password);
     }
 
-    public void clickLoginButton() {
-        new WebDriverWait(driver, Duration.ofSeconds(5))
-                .until(ExpectedConditions.visibilityOfElementLocated(loginButton));
-        driver.findElement(loginButton).click();
-    }
-
     public void sendLoginDataFields(String email, String password) {
         sendLoginName(email);
         sendLoginPassword(password);
+    }
+
+    public void displayedLoginWord() {
+        new WebDriverWait(driver, Duration.ofSeconds(5))
+                .until(ExpectedConditions.visibilityOfElementLocated(loginImage));
     }
 }
