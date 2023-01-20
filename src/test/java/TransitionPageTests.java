@@ -10,9 +10,9 @@ import pageobject.PersonalAccountPageBurger;
 
 public class TransitionPageTests {
     private WebDriver driver;
-    String loginName = "testLogin";
-    String loginMail = "testlogin@test.com";
-    String password = "123456";
+    String name = "Test";
+    String mail = "test@gmail.com";
+    String password = "lexa1234";
 
     @Before
     public void BeforeTest() {
@@ -27,32 +27,28 @@ public class TransitionPageTests {
     }
 
     @Test
-    public void transitionIntoPersonalAccountPageFromConstructorPage(){
+    public void transitionIntoPersonalAccountPageFromConstructorPage() {
         ConstructorPageBurger constructorPageBurger = new ConstructorPageBurger(driver);
-        LoginPageBurger loginPageBurger = new LoginPageBurger(driver);
         PersonalAccountPageBurger personalAccountPageBurger = new PersonalAccountPageBurger(driver);
+        TestCases testCases = new TestCases(driver);
 
         constructorPageBurger.clickLoginAccountButton();
-        loginPageBurger.sendLoginDataFields(loginMail, password);
-        loginPageBurger.clickLoginButton();
-        constructorPageBurger.checkCreateOrderButton();
+        testCases.loginAccount(mail, password);
         constructorPageBurger.clickPersonalAccountButton();
         personalAccountPageBurger.checkProfileWord();
         personalAccountPageBurger.checkStoryOrdersWord();
-        personalAccountPageBurger.checkNameFieldValue(loginName);
-        personalAccountPageBurger.checkLoginFieldValue(loginMail);
+        personalAccountPageBurger.checkNameFieldValue(name);
+        personalAccountPageBurger.checkLoginFieldValue(mail);
     }
 
     @Test
-    public void transitionIntoConstructorPagePageFromPersonalAccountPage(){
+    public void transitionIntoConstructorPagePageFromPersonalAccountPage() {
         ConstructorPageBurger constructorPageBurger = new ConstructorPageBurger(driver);
-        LoginPageBurger loginPageBurger = new LoginPageBurger(driver);
         PersonalAccountPageBurger personalAccountPageBurger = new PersonalAccountPageBurger(driver);
+        TestCases testCases = new TestCases(driver);
 
         constructorPageBurger.clickLoginAccountButton();
-        loginPageBurger.sendLoginDataFields(loginMail, password);
-        loginPageBurger.clickLoginButton();
-        constructorPageBurger.checkCreateOrderButton();
+        testCases.loginAccount(mail, password);
         constructorPageBurger.clickPersonalAccountButton();
         personalAccountPageBurger.checkProfileWord();
         personalAccountPageBurger.clickConstructorButton();
@@ -63,15 +59,14 @@ public class TransitionPageTests {
     }
 
     @Test
-    public void exitPersonalAccount(){
+    public void exitPersonalAccount() {
         ConstructorPageBurger constructorPageBurger = new ConstructorPageBurger(driver);
         LoginPageBurger loginPageBurger = new LoginPageBurger(driver);
         PersonalAccountPageBurger personalAccountPageBurger = new PersonalAccountPageBurger(driver);
+        TestCases testCases = new TestCases(driver);
 
         constructorPageBurger.clickLoginAccountButton();
-        loginPageBurger.sendLoginDataFields(loginMail, password);
-        loginPageBurger.clickLoginButton();
-        constructorPageBurger.checkCreateOrderButton();
+        testCases.loginAccount(mail, password);
         constructorPageBurger.clickPersonalAccountButton();
         personalAccountPageBurger.clickExitButton();
         loginPageBurger.displayedLoginWord();
@@ -82,15 +77,12 @@ public class TransitionPageTests {
     }
 
     @Test
-    public void transitionIngredientInConstructorPage(){
+    public void transitionIngredientInConstructorPage() {
         ConstructorPageBurger constructorPageBurger = new ConstructorPageBurger(driver);
-        LoginPageBurger loginPageBurger = new LoginPageBurger(driver);
-        PersonalAccountPageBurger personalAccountPageBurger = new PersonalAccountPageBurger(driver);
+        TestCases testCases = new TestCases(driver);
 
         constructorPageBurger.clickLoginAccountButton();
-        loginPageBurger.sendLoginDataFields(loginMail, password);
-        loginPageBurger.clickLoginButton();
-        constructorPageBurger.checkCreateOrderButton();
+        testCases.loginAccount(mail, password);
         constructorPageBurger.clickAndSelectTypeButtonBurger("Начинки");
         constructorPageBurger.checkIngredientNameTypeToScrollList("Начинки");
         constructorPageBurger.clickAndSelectTypeButtonBurger("Соусы");

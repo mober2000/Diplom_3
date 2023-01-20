@@ -1,3 +1,5 @@
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,11 +12,9 @@ import pageobject.LoginPageBurger;
 import pageobject.RegistrationPageBurger;
 
 public class LoginTests {
-
     private WebDriver driver;
-    String loginMail = "TestLogin@test.com";
-    String password = "123456";
-
+    String mail = "test@gmail.com";
+    String password = "lexa1234";
 
     @Before
     public void BeforeTest() {
@@ -29,52 +29,54 @@ public class LoginTests {
     }
 
     @Test
-    public void loginMainPage(){
+    @DisplayName("Login Main Page")
+    @Description("Вход по кнопке «Войти в аккаунт» на главной")
+    public void loginMainPage() {
         ConstructorPageBurger constructorPageBurger = new ConstructorPageBurger(driver);
-        LoginPageBurger loginPageBurger = new LoginPageBurger(driver);
+        TestCases testCases = new TestCases(driver);
 
         constructorPageBurger.clickLoginAccountButton();
-        loginPageBurger.sendLoginDataFields(loginMail, password);
-        loginPageBurger.clickLoginButton();
-        constructorPageBurger.checkCreateOrderButton();
+        testCases.loginAccount(mail, password);
     }
 
     @Test
-    public void loginThroughPersonalAccountButton(){
+    @DisplayName("Login Through Personal Account")
+    @Description("Вход через кнопку «Личный кабинет»")
+    public void loginThroughPersonalAccountButton() {
         ConstructorPageBurger constructorPageBurger = new ConstructorPageBurger(driver);
-        LoginPageBurger loginPageBurger = new LoginPageBurger(driver);
+        TestCases testCases = new TestCases(driver);
 
         constructorPageBurger.clickPersonalAccountButton();
-        loginPageBurger.sendLoginDataFields(loginMail, password);
-        loginPageBurger.clickLoginButton();
-        constructorPageBurger.checkCreateOrderButton();
+        testCases.loginAccount(mail, password);
     }
 
     @Test
-    public void loginThroughRegistrationForm(){
+    @DisplayName("Login Through Registration Form")
+    @Description("Вход через кнопку в форме регистрации")
+    public void loginThroughRegistrationForm() {
         ConstructorPageBurger constructorPageBurger = new ConstructorPageBurger(driver);
         LoginPageBurger loginPageBurger = new LoginPageBurger(driver);
         RegistrationPageBurger registrationPageBurger = new RegistrationPageBurger(driver);
+        TestCases testCases = new TestCases(driver);
 
         constructorPageBurger.clickLoginAccountButton();
         loginPageBurger.clickRegistrationAccountButton();
         registrationPageBurger.clickLoginButton();
-        loginPageBurger.sendLoginDataFields(loginMail, password);
-        loginPageBurger.clickLoginButton();
-        constructorPageBurger.checkCreateOrderButton();
+        testCases.loginAccount(mail, password);
     }
 
     @Test
-    public void loginThroughForgotPasswordForm(){
+    @DisplayName("Login Through Forgot Password Form")
+    @Description("Вход через кнопку в форме восстановления пароля")
+    public void loginThroughForgotPasswordForm() {
         ConstructorPageBurger constructorPageBurger = new ConstructorPageBurger(driver);
         LoginPageBurger loginPageBurger = new LoginPageBurger(driver);
         ForgotPasswordPageBurger forgotPasswordPageBurger = new ForgotPasswordPageBurger(driver);
+        TestCases testCases = new TestCases(driver);
 
         constructorPageBurger.clickLoginAccountButton();
         loginPageBurger.clickForgotPasswordButton();
         forgotPasswordPageBurger.clickLoginButton();
-        loginPageBurger.sendLoginDataFields(loginMail, password);
-        loginPageBurger.clickLoginButton();
-        constructorPageBurger.checkCreateOrderButton();
+        testCases.loginAccount(mail, password);
     }
 }

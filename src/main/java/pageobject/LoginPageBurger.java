@@ -21,33 +21,40 @@ public class LoginPageBurger {
         this.driver = driver;
     }
 
-    public void clickRegistrationAccountButton(){
+    public void clickRegistrationAccountButton() {
         driver.findElement(registrationAccountButton).click();
     }
-    public void clickForgotPasswordButton(){
+
+    public void clickForgotPasswordButton() {
         driver.findElement(forgotPasswordButton).click();
     }
-    public void clickConstructorButton(){
+
+    public void clickConstructorButton() {
         driver.findElement(constructorButton).click();
     }
 
-    public void displayedLoginWord(){
+    public void displayedLoginWord() {
         new WebDriverWait(driver, Duration.ofSeconds(5))
                 .until(ExpectedConditions.visibilityOfElementLocated(loginImage));
     }
+
     public void sendLoginName(String email) {
+        new WebDriverWait(driver, Duration.ofSeconds(5))
+                .until(ExpectedConditions.visibilityOfElementLocated(emailField));
         driver.findElement(emailField).sendKeys(email);
     }
 
-    public void sendLoginPassword(String password){
+    public void sendLoginPassword(String password) {
         driver.findElement(passwordField).sendKeys(password);
     }
 
-    public void clickLoginButton(){
+    public void clickLoginButton() {
+        new WebDriverWait(driver, Duration.ofSeconds(5))
+                .until(ExpectedConditions.visibilityOfElementLocated(loginButton));
         driver.findElement(loginButton).click();
     }
 
-    public void sendLoginDataFields(String email, String password){
+    public void sendLoginDataFields(String email, String password) {
         sendLoginName(email);
         sendLoginPassword(password);
     }

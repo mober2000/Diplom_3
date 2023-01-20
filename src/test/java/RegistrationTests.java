@@ -4,7 +4,6 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import pageobject.ConstructorPageBurger;
 import pageobject.LoginPageBurger;
 import pageobject.RegistrationPageBurger;
 
@@ -15,8 +14,6 @@ public class RegistrationTests {
     String mail = randomGenerator.randomEmailYandex();
     String correctPassword = randomGenerator.randomCorrectPassword();
     String incorrectPassword = randomGenerator.randomIncorrectPassword();
-
-
 
     @Before
     public void BeforeTest() {
@@ -31,28 +28,19 @@ public class RegistrationTests {
     }
 
     @Test
-    public void checkRegistration(){
-        ConstructorPageBurger constructorPageBurger = new ConstructorPageBurger(driver);
+    public void checkRegistration() {
+        TestCases testCases = new TestCases(driver);
         LoginPageBurger loginPageBurger = new LoginPageBurger(driver);
-        RegistrationPageBurger registrationPageBurger = new RegistrationPageBurger(driver);
-
-        constructorPageBurger.clickLoginAccountButton();
-        loginPageBurger.clickRegistrationAccountButton();
-        registrationPageBurger.sendRegistrationDataFields(name, mail, correctPassword);
-        registrationPageBurger.clickRegistrationButton();
+        testCases.registrationAccount(name, mail, correctPassword);
         loginPageBurger.displayedLoginWord();
     }
 
     @Test
-    public void checkRegistrationIncorrectPassword(){
-        ConstructorPageBurger constructorPageBurger = new ConstructorPageBurger(driver);
-        LoginPageBurger loginPageBurger = new LoginPageBurger(driver);
+    public void checkRegistrationIncorrectPassword() {
         RegistrationPageBurger registrationPageBurger = new RegistrationPageBurger(driver);
-
-        constructorPageBurger.clickLoginAccountButton();
-        loginPageBurger.clickRegistrationAccountButton();
-        registrationPageBurger.sendRegistrationDataFields(name, mail, incorrectPassword);
-        registrationPageBurger.clickRegistrationButton();
+        TestCases testCases = new TestCases(driver);
+        testCases.registrationAccount(name, mail, incorrectPassword);
         registrationPageBurger.displayedIncorrectPasswordMessage();
+
     }
 }

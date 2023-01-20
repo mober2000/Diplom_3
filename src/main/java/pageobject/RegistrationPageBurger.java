@@ -13,12 +13,11 @@ public class RegistrationPageBurger {
     private final By incorrectPasswordMessage = By.xpath(".//p[@class='input__error text_type_main-default' and text()='Некорректный пароль']");
     private final By loginAccountButton = By.xpath(".//a[text()='Войти']");
 
-
     public RegistrationPageBurger(WebDriver driver) {
         this.driver = driver;
     }
 
-    public void clickLoginButton(){
+    public void clickLoginButton() {
         driver.findElement(loginAccountButton).click();
     }
 
@@ -36,18 +35,17 @@ public class RegistrationPageBurger {
         driver.findElement(passwordField).sendKeys(password);
     }
 
-    public void clickRegistrationButton(){
+    public void clickRegistrationButton() {
         driver.findElement(registrationButton).click();
     }
 
-    public void displayedIncorrectPasswordMessage(){
+    public void displayedIncorrectPasswordMessage() {
         driver.findElement(incorrectPasswordMessage).isDisplayed();
     }
 
-    public void sendRegistrationDataFields(String name, String email, String password){
+    public void sendRegistrationDataFields(String name, String email, String password) {
         sendRegistrationName(name);
         sendRegistrationMail(email);
         sendRegistrationPassword(password);
     }
-
 }

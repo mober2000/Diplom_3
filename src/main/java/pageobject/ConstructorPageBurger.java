@@ -18,33 +18,31 @@ public class ConstructorPageBurger {
         this.driver = driver;
     }
 
-    public void clickLoginAccountButton(){
+    public void clickLoginAccountButton() {
         driver.findElement(loginAccountButton).click();
     }
 
-    public void clickPersonalAccountButton(){
+    public void clickPersonalAccountButton() {
         driver.findElement(personalAccountButton).click();
     }
 
-    public void checkCreateOrderButton(){
+    public void checkCreateOrderButton() {
         new WebDriverWait(driver, Duration.ofSeconds(5))
                 .until(ExpectedConditions.visibilityOfElementLocated(createOrderButton));
     }
 
-    public void checkLoginAccountButton(){
+    public void checkLoginAccountButton() {
         driver.findElement(loginAccountButton).isDisplayed();
     }
 
-    public void clickAndSelectTypeButtonBurger(String ingredientType){
+    public void clickAndSelectTypeButtonBurger(String ingredientType) {
         driver.findElement(By.xpath(".//span[text()='" + ingredientType + "']")).click();
         driver.findElement(By.xpath(".//div[@class='tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 pb-4 pl-10 noselect']/span[text()='" + ingredientType + "']")).isDisplayed();
     }
 
-    public void checkIngredientNameTypeToScrollList(String ingredientType){
+    public void checkIngredientNameTypeToScrollList(String ingredientType) {
         new WebDriverWait(driver, Duration.ofSeconds(5))
-                .until(ExpectedConditions.visibilityOfElementLocated((By.xpath(".//h2[text()='" + ingredientType +"']"))));
+                .until(ExpectedConditions.visibilityOfElementLocated((By.xpath(".//h2[text()='" + ingredientType + "']"))));
 
     }
-
-
 }
