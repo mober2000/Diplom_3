@@ -1,3 +1,4 @@
+import testcases.ApiCases;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
@@ -10,22 +11,32 @@ import pageobject.ConstructorPageBurger;
 import pageobject.ForgotPasswordPageBurger;
 import pageobject.LoginPageBurger;
 import pageobject.RegistrationPageBurger;
+import testcases.UiTestCases;
 
 public class LoginTests {
     private WebDriver driver;
-    String mail = "test@gmail.com";
-    String password = "lexa1234";
+    RandomGenerator randomGenerator = new RandomGenerator();
+    String mail = randomGenerator.randomEmailYandex();
+    String password = randomGenerator.randomCorrectPassword();
+    String name = randomGenerator.randomName();
+    String bearerToken;
+
 
     @Before
     public void BeforeTest() {
+        ApiCases apiCases = new ApiCases();
         ChromeOptions options = new ChromeOptions();
         driver = new ChromeDriver(options);
-        driver.get("https://stellarburgers.nomoreparties.site");
+        driver.get(apiCases.SITE_URL);
+        apiCases.createCorrectUser(mail, password, name);
+        bearerToken = apiCases.getBearerTokenCreatedAccount();
     }
 
     @After
     public void tearDown() {
+        ApiCases apiCases = new ApiCases();
         driver.quit();
+        apiCases.deleteUser(bearerToken);
     }
 
     @Test
@@ -33,10 +44,10 @@ public class LoginTests {
     @Description("Вход по кнопке «Войти в аккаунт» на главной")
     public void loginMainPage() {
         ConstructorPageBurger constructorPageBurger = new ConstructorPageBurger(driver);
-        TestCases testCases = new TestCases(driver);
+        UiTestCases uiTestCases = new UiTestCases(driver);
 
         constructorPageBurger.clickLoginAccountButton();
-        testCases.loginAccount(mail, password);
+        uiTestCases.loginAccount(mail, password);
     }
 
     @Test
@@ -44,10 +55,10 @@ public class LoginTests {
     @Description("Вход через кнопку «Личный кабинет»")
     public void loginThroughPersonalAccountButton() {
         ConstructorPageBurger constructorPageBurger = new ConstructorPageBurger(driver);
-        TestCases testCases = new TestCases(driver);
+        UiTestCases uiTestCases = new UiTestCases(driver);
 
         constructorPageBurger.clickPersonalAccountButton();
-        testCases.loginAccount(mail, password);
+        uiTestCases.loginAccount(mail, password);
     }
 
     @Test
@@ -57,12 +68,12 @@ public class LoginTests {
         ConstructorPageBurger constructorPageBurger = new ConstructorPageBurger(driver);
         LoginPageBurger loginPageBurger = new LoginPageBurger(driver);
         RegistrationPageBurger registrationPageBurger = new RegistrationPageBurger(driver);
-        TestCases testCases = new TestCases(driver);
+        UiTestCases uiTestCases = new UiTestCases(driver);
 
         constructorPageBurger.clickLoginAccountButton();
         loginPageBurger.clickRegistrationAccountButton();
         registrationPageBurger.clickLoginButton();
-        testCases.loginAccount(mail, password);
+        uiTestCases.loginAccount(mail, password);
     }
 
     @Test
@@ -72,11 +83,11 @@ public class LoginTests {
         ConstructorPageBurger constructorPageBurger = new ConstructorPageBurger(driver);
         LoginPageBurger loginPageBurger = new LoginPageBurger(driver);
         ForgotPasswordPageBurger forgotPasswordPageBurger = new ForgotPasswordPageBurger(driver);
-        TestCases testCases = new TestCases(driver);
+        UiTestCases uiTestCases = new UiTestCases(driver);
 
         constructorPageBurger.clickLoginAccountButton();
         loginPageBurger.clickForgotPasswordButton();
         forgotPasswordPageBurger.clickLoginButton();
-        testCases.loginAccount(mail, password);
+        uiTestCases.loginAccount(mail, password);
     }
 }

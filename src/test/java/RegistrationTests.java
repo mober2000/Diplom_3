@@ -1,3 +1,5 @@
+import api.Api;
+import testcases.ApiCases;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
@@ -8,6 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import pageobject.LoginPageBurger;
 import pageobject.RegistrationPageBurger;
+import testcases.UiTestCases;
 
 public class RegistrationTests {
     private WebDriver driver;
@@ -19,9 +22,10 @@ public class RegistrationTests {
 
     @Before
     public void BeforeTest() {
+        Api api = new Api();
         ChromeOptions options = new ChromeOptions();
         driver = new ChromeDriver(options);
-        driver.get("https://stellarburgers.nomoreparties.site");
+        driver.get(api.SITE_URL);
     }
 
     @After
@@ -33,10 +37,15 @@ public class RegistrationTests {
     @DisplayName("Check Registration")
     @Description("Проверка успешной регистрации нового пользователя")
     public void checkRegistration() {
-        TestCases testCases = new TestCases(driver);
+        UiTestCases uiTestCases = new UiTestCases(driver);
         LoginPageBurger loginPageBurger = new LoginPageBurger(driver);
-        testCases.registrationAccount(name, mail, correctPassword);
+        ApiCases apiCases = new ApiCases();
+
+        uiTestCases.registrationAccount(name, mail, correctPassword);
         loginPageBurger.displayedLoginWord();
+        apiCases.loginUser(mail, correctPassword, name);
+        String bearerToken = apiCases.getBearerTokenCreatedAccount();
+        apiCases.deleteUser(bearerToken);
     }
 
     @Test
@@ -44,8 +53,8 @@ public class RegistrationTests {
     @Description("Проверка ошибки для некорректного пароля. Минимальный пароль — шесть символов.")
     public void checkRegistrationIncorrectPassword() {
         RegistrationPageBurger registrationPageBurger = new RegistrationPageBurger(driver);
-        TestCases testCases = new TestCases(driver);
-        testCases.registrationAccount(name, mail, incorrectPassword);
+        UiTestCases uiTestCases = new UiTestCases(driver);
+        uiTestCases.registrationAccount(name, mail, incorrectPassword);
         registrationPageBurger.displayedIncorrectPasswordMessage();
     }
 }

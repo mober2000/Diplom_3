@@ -21,6 +21,10 @@ public class RegistrationPageBurger {
         driver.findElement(loginAccountButton).click();
     }
 
+    public void clickRegistrationButton() {
+        driver.findElement(registrationButton).click();
+    }
+
     public void sendRegistrationName(String name) {
         driver.findElement(nameField).click();
         driver.findElement(activeNameOrEmailFields).sendKeys(name);
@@ -35,17 +39,13 @@ public class RegistrationPageBurger {
         driver.findElement(passwordField).sendKeys(password);
     }
 
-    public void clickRegistrationButton() {
-        driver.findElement(registrationButton).click();
-    }
-
-    public void displayedIncorrectPasswordMessage() {
-        driver.findElement(incorrectPasswordMessage).isDisplayed();
-    }
-
     public void sendRegistrationDataFields(String name, String email, String password) {
         sendRegistrationName(name);
         sendRegistrationMail(email);
         sendRegistrationPassword(password);
+    }
+
+    public void displayedIncorrectPasswordMessage() {
+        driver.findElement(incorrectPasswordMessage).isDisplayed();
     }
 }
